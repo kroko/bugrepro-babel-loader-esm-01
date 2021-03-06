@@ -1,0 +1,57 @@
+<%
+const CSP_WEBPACKBUILD_WARP_NONCE = htmlWebpackPlugin.options.warp.CSP_WEBPACKBUILD_WARP_NONCE || '';
+const WDS_RUNNING = htmlWebpackPlugin.options.warp.WDS_RUNNING || false;
+%><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+  <% if (WDS_RUNNING) { %>
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-eval' 'unsafe-inline' localhost:* ws://localhost:*;"> -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
+  <% } else { %>
+    <% // FIXME: %>
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'nonce-<%= CSP_WEBPACKBUILD_WARP_NONCE %>';"> -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
+  <% } %>
+
+
+  <title></title>
+  <meta name="author" content="BUGREPROSTRINGOMIT">
+  <meta name="designer" content="BUGREPROSTRINGOMIT">
+  <meta name="generator" content="WARP | www.warp.lv">
+
+  <!-- WOFF2 PRELOAD -->
+  <% for (const key in compilation.assets) { %>
+    <% const isFontWoff2 = /\.woff2$/.test(key); %>
+    <% if (isFontWoff2) { %>
+      <link rel="preload" href="<%= htmlWebpackPlugin.files.publicPath %><%= key %>" as="font" type="font/woff2" crossorigin>
+    <% } %>
+  <% } %>
+
+  <!-- CSS REFERENCE -->
+  <% for (const key in htmlWebpackPlugin.files.css) { %>
+    <link href="<%= htmlWebpackPlugin.files.css[key] %>" rel="stylesheet" type="text/css">
+  <% } %>
+
+  <script>
+    global = globalThis;
+  </script>
+
+  <!-- JS REFERENCE CHUNKS -->
+  <% for (const key in htmlWebpackPlugin.files.js) { %>
+    <script defer src="<%= htmlWebpackPlugin.files.js[key] %>"></script>
+  <% } %>
+
+
+</head>
+<body>
+  <noscript>
+    <div class="noscript">
+      The app is broken. Please contact BUGREPROSTRINGOMIT support.
+    </div>
+  </noscript>
+  <div class="app"></div>
+</body>
+</html>

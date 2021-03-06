@@ -1,0 +1,26 @@
+{
+  // disable VSCode built in syntax validation so that ESLint is used
+  "javascript.validate.enable": false,
+  "html.validate.scripts": false,
+  // disable VSCode built in syntax validation so that ESLint typescript-eslint is used
+  "typescript.validate.enable": false,
+  // disable VSCode built in syntax validation so that Stylelint is used
+  "html.validate.styles": false,
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  // disable prettier, or more preciselly - override default formaters
+  "prettier.enable": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+}

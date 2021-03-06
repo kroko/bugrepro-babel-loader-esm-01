@@ -1,0 +1,17 @@
+# by default: node_modules/**
+# by default: bower_components/**
+asar-check/**
+build/**
+compile/**
+dist/**
+
+!.babelrc.js
+!.eslintrc.js
+!.postcssrc.js
+!.stylelintrc.js
+
+!.warp.electron-builder.config.js
+!.warp.webpack.config.main.mjs
+!.warp.webpack.config.preload.mjs
+!.warp.webpack.config.renderer.mjs
+
