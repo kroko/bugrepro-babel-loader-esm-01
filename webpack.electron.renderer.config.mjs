@@ -327,7 +327,12 @@ config.module = {
         {
           loader: 'postcss-loader',
           options: {
-            sourceMap: true
+            sourceMap: true,
+            options: {
+              postcssOptions: {
+                config: path.resolve(cjsDirname, 'app-renderer/.postcssrc.js')
+              }
+            }
           }
         },
         {
